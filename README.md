@@ -10,7 +10,7 @@
 - **+26% Accuracy** over OpenAI Memory on the LOCOMO benchmark
 - **91% Faster Responses** than full-context, ensuring low-latency at scale
 - **90% Lower Token Usage** than full-context, cutting costs without compromise
-- [Read the full paper](https://www.zentry.gg/blog/zentry-building-production-ready-ai-agents)
+
 
 # Introduction
 
