@@ -374,11 +374,6 @@
       }
     ]
   },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg",
-    "href": "https://github.com/zentry-ai/zentry"
-  },
   "background": {
     "color": {
       "light": "#fff",
