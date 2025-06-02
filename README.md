@@ -1,37 +1,6 @@
 
 <p align="center">
-  <a href="https://zentry.gg">Learn more</a>
-  ·
-  <a href="https://Zentry.dev/DiG">Join Discord</a>
-  ·
-  <a href="https://Zentry.dev/demo">Demo</a>
-  ·
-  <a href="https://Zentry.dev/openmemory">OpenMemory</a>
-</p>
-
-<p align="center">
-  <a href="https://Zentry.dev/DiG">
-    <img src="https://dcbadge.vercel.app/api/server/6PzXDgEjG5?style=flat" alt="Zentry Discord">
-  </a>
-  <a href="https://pepy.tech/project/Zentryai">
-    <img src="https://img.shields.io/pypi/dm/Zentryai" alt="Zentry PyPI - Downloads">
-  </a>
-  <a href="https://github.com/Zentryai/Zentry">
-    <img src="https://img.shields.io/github/commit-activity/m/Zentryai/Zentry?style=flat-square" alt="GitHub commit activity">
-  </a>
-  <a href="https://pypi.org/project/Zentryai" target="blank">
-    <img src="https://img.shields.io/pypi/v/Zentryai?color=%2334D058&label=pypi%20package" alt="Package version">
-  </a>
-  <a href="https://www.npmjs.com/package/Zentryai" target="blank">
-    <img src="https://img.shields.io/npm/v/Zentryai" alt="Npm package">
-  </a>
-  <a href="https://www.ycombinator.com/companies/Zentry">
-    <img src="https://img.shields.io/badge/Y%20Combinator-S24-orange?style=flat-square" alt="Y Combinator S24">
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://zentry.gg/research"><strong>📄 Building Production-Ready AI Agents with Scalable Long-Term Memory →</strong></a>
+  <a href="https://www.zentry.gg/blog/zentry-building-production-ready-ai-agents"><strong>📄 Building Production-Ready AI Agents with Scalable Long-Term Memory →</strong></a>
 </p>
 <p align="center">
   <strong>⚡ +26% Accuracy vs. OpenAI Memory • 🚀 91% Faster • 💰 90% Fewer Tokens</strong>
@@ -41,11 +10,11 @@
 - **+26% Accuracy** over OpenAI Memory on the LOCOMO benchmark
 - **91% Faster Responses** than full-context, ensuring low-latency at scale
 - **90% Lower Token Usage** than full-context, cutting costs without compromise
-- [Read the full paper](https://zentry.gg/research)
+- [Read the full paper](https://www.zentry.gg/blog/zentry-building-production-ready-ai-agents)
 
 # Introduction
 
-[Zentry](https://zentry.gg) ("mem-zero") enhances AI assistants and agents with an intelligent memory layer, enabling personalized AI interactions. It remembers user preferences, adapts to individual needs, and continuously learns over time—ideal for customer support chatbots, AI assistants, and autonomous systems.
+[Zentry](https://zentry.gg) enhances AI assistants and agents with an intelligent memory layer, enabling personalized AI interactions. It remembers user preferences, adapts to individual needs, and continuously learns over time—ideal for customer support chatbots, AI assistants, and autonomous systems.
 
 ### Key Features & Use Cases
 
@@ -138,19 +107,5 @@ For detailed integration steps, see the [Quickstart](https://docs.zentry.gg/quic
 ## 📚 Documentation & Support
 
 - Full docs: https://docs.zentry.gg
-- Community: [Discord](https://Zentry.dev/DiG) · [Twitter](https://x.com/Zentryai)
+- Community: [Telegram](https://t.me/zentrycommunity) · [Twitter](https://x.com/zentrysol)
 - Contact: founders@zentry.gg
-
-## Citation
-
-We now have a paper you can cite:
-
-```bibtex
-@article{Zentry,
-  title={Zentry: Building Production-Ready AI Agents with Scalable Long-Term Memory},
-  author={Chhikara, Prateek and Khant, Dev and Aryan, Saket and Singh, Taranjeet and Yadav, Deshraj},
-  journal={arXiv preprint arXiv:2504.19413},
-  year={2025}
-}
-```
-
