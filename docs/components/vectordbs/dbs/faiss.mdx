@@ -4,7 +4,7 @@
 
 ```python
 import os
-from zentry import Memory
+from Zentry import Memory
 
 os.environ["OPENAI_API_KEY"] = "sk-xx"
 
@@ -31,7 +31,7 @@ m.add(messages, user_id="alice", metadata={"category": "movies"})
 
 ### Installation
 
-To use FAISS in your zentry project, you need to install the appropriate FAISS package for your environment:
+To use FAISS in your Zentry project, you need to install the appropriate FAISS package for your environment:
 
 ```bash
 # For CPU version
@@ -47,7 +47,7 @@ Here are the parameters available for configuring FAISS:
 
 | Parameter | Description | Default Value |
 | --- | --- | --- |
-| `collection_name` | The name of the collection | `zentry` |
+| `collection_name` | The name of the collection | `Zentry` |
 | `path` | Path to store FAISS index and metadata | `/tmp/faiss/<collection_name>` |
 | `distance_strategy` | Distance metric strategy to use (options: 'euclidean', 'inner_product', 'cosine') | `euclidean` |
 | `normalize_L2` | Whether to normalize L2 vectors (only applicable for euclidean distance) | `False` |
@@ -59,11 +59,11 @@ FAISS offers several advantages for vector search:
 1. **Efficiency**: FAISS is optimized for memory usage and speed, making it suitable for large-scale applications.
 2. **Offline Support**: FAISS works entirely locally, with no need for external servers or API calls.
 3. **Storage Options**: Vectors can be stored in-memory for maximum speed or persisted to disk.
-4. **Multiple Index Types**: FAISS supports different index types optimized for various use cases (though zentry currently uses the basic flat index).
+4. **Multiple Index Types**: FAISS supports different index types optimized for various use cases (though Zentry currently uses the basic flat index).
 
 ### Distance Strategies
 
-FAISS in zentry supports three distance strategies:
+FAISS in Zentry supports three distance strategies:
 
 - **euclidean**: L2 distance, suitable for most embedding models
 - **inner_product**: Dot product similarity, useful for some specialized embeddings

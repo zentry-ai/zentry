@@ -15,7 +15,7 @@ docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:lat
 <CodeGroup>
 ```python Python
 import os
-from zentry import Memory
+from Zentry import Memory
 
 os.environ["OPENAI_API_KEY"] = "sk-xx"
 
@@ -23,7 +23,7 @@ config = {
     "vector_store": {
         "provider": "redis",
         "config": {
-            "collection_name": "zentry",
+            "collection_name": "Zentry",
             "embedding_model_dims": 1536,
             "redis_url": "redis://localhost:6379"
         }
@@ -42,7 +42,7 @@ m.add(messages, user_id="alice", metadata={"category": "movies"})
 ```
 
 ```typescript TypeScript
-import { Memory } from 'zentry/oss';
+import { Memory } from 'Zentryai/oss';
 
 const config = {
   vectorStore: {
@@ -76,14 +76,14 @@ Let's see the available parameters for the `redis` config:
 <Tab title="Python">
 | Parameter | Description | Default Value |
 | --- | --- | --- |
-| `collection_name` | The name of the collection to store the vectors | `zentry` |
+| `collection_name` | The name of the collection to store the vectors | `Zentry` |
 | `embedding_model_dims` | Dimensions of the embedding model | `1536` |
 | `redis_url` | The URL of the Redis server | `None` |
 </Tab>
 <Tab title="TypeScript">
 | Parameter | Description | Default Value |
 | --- | --- | --- |
-| `collectionName` | The name of the collection to store the vectors | `zentry` |
+| `collectionName` | The name of the collection to store the vectors | `Zentry` |
 | `embeddingModelDims` | Dimensions of the embedding model | `1536` |
 | `redisUrl` | The URL of the Redis server | `None` |
 | `username` | Username for Redis connection | `None` |
