@@ -1,0 +1,36 @@
+services:
+  zentry_store:
+    image: qdrant/qdrant
+    ports:
+      - "6333:6333"
+    volumes:
+      - zentry_storage:/zentry/storage
+  openmemory-mcp:
+    image: zentry/openmemory-mcp
+    build: api/
+    environment:
+      - USER
+      - API_KEY
+    env_file:
+      - api/.env
+    depends_on:
+      - zentry_store
+    ports:
+      - "8765:8765"
+    volumes:
+      - ./api:/usr/src/openmemory
+    command: >
+      sh -c "uvicorn main:app --host 0.0.0.0 --port 8765 --reload --workers 4"
+  openmemory-ui:
+    build:
+      context: ui/
+      dockerfile: Dockerfile
+    image: zentry/openmemory-ui:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+      - NEXT_PUBLIC_USER_ID=${USER}
+
+volumes:
+  zentry_storage:

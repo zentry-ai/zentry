@@ -1,0 +1,253 @@
+---
+title: Vercel AI SDK
+---
+
+<Snippet file="paper-release.mdx" />
+
+The [**Zentry AI SDK Provider**](https://www.npmjs.com/package/@Zentry/vercel-ai-provider) is a library developed by **Zentry** to integrate with the Vercel AI SDK. This library brings enhanced AI interaction capabilities to your applications by introducing persistent memory functionality.
+
+<Note type="info">
+  🎉 Exciting news! Zentry AI SDK now supports <strong>Graph Memory</strong>.
+</Note>
+
+## Overview
+
+1. 🧠 Offers persistent memory storage for conversational AI
+2. 🔄 Enables smooth integration with the Vercel AI SDK
+3. 🚀 Ensures compatibility with multiple LLM providers
+4. 📝 Supports structured message formats for clarity
+5. ⚡ Facilitates streaming response capabilities
+
+## Setup and Configuration
+
+Install the SDK provider using npm:
+
+```bash
+npm install @Zentry/vercel-ai-provider
+```
+
+## Getting Started
+
+### Setting Up Zentry
+
+1. Get your **Zentry API Key** from the [Zentry Dashboard](https://app.zentry.gg/dashboard/api-keys).
+
+2. Initialize the Zentry Client in your application:
+
+    ```typescript
+    import { createZentry } from "@Zentry/vercel-ai-provider";
+
+    const Zentry = createZentry({
+      provider: "openai",
+      ZentryApiKey: "m0-xxx",
+      apiKey: "provider-api-key",
+      config: {
+        compatibility: "strict",
+      },
+      // Optional Zentry Global Config
+      ZentryConfig: {
+        user_id: "Zentry-user-id",
+        org_id: "Zentry-org-id",
+        project_id: "Zentry-project-id",
+      },
+    });
+    ```
+
+    > **Note**: The `openai` provider is set as default. Consider using `Zentry_API_KEY` and `OPENAI_API_KEY` as environment variables for security.
+
+    > **Note**: The `ZentryConfig` is optional. It is used to set the global config for the Zentry Client (eg. `user_id`, `agent_id`, `app_id`, `run_id`, `org_id`, `project_id` etc).
+
+3. Add Memories to Enhance Context:
+
+    ```typescript
+    import { LanguageModelV1Prompt } from "ai";
+    import { addMemories } from "@Zentry/vercel-ai-provider";
+
+    const messages: LanguageModelV1Prompt = [
+      { role: "user", content: [{ type: "text", text: "I love red cars." }] },
+    ];
+
+    await addMemories(messages, { user_id: "borat" });
+    ```
+
+### Standalone Features:
+
+    ```typescript
+    await addMemories(messages, { user_id: "borat", ZentryApiKey: "m0-xxx", org_id: "org_xx", project_id: "proj_xx" });
+    await retrieveMemories(prompt, { user_id: "borat", ZentryApiKey: "m0-xxx", org_id: "org_xx", project_id: "proj_xx" });
+    await getMemories(prompt, { user_id: "borat", ZentryApiKey: "m0-xxx", org_id: "org_xx", project_id: "proj_xx" });
+    ```
+     > For standalone features, such as `addMemories`, `retrieveMemories`, and `getMemories`, you must either set `Zentry_API_KEY` as an environment variable or pass it directly in the function call.
+
+     > `getMemories` will return raw memories in the form of an array of objects, while `retrieveMemories` will return a response in string format with a system prompt ingested with the retrieved memories.
+
+     > `getMemories` is an object with two keys: `results` and `relations` if `enable_graph` is enabled. Otherwise, it will return an array of objects.
+
+### 1. Basic Text Generation with Memory Context
+
+    ```typescript
+    import { generateText } from "ai";
+    import { createZentry } from "@Zentry/vercel-ai-provider";
+
+    const Zentry = createZentry();
+
+    const { text } = await generateText({
+      model: Zentry("gpt-4-turbo", { user_id: "borat" }),
+      prompt: "Suggest me a good car to buy!",
+    });
+    ```
+
+### 2. Combining OpenAI Provider with Memory Utils
+
+    ```typescript
+    import { generateText } from "ai";
+    import { openai } from "@ai-sdk/openai";
+    import { retrieveMemories } from "@Zentry/vercel-ai-provider";
+
+    const prompt = "Suggest me a good car to buy.";
+    const memories = await retrieveMemories(prompt, { user_id: "borat" });
+
+    const { text } = await generateText({
+      model: openai("gpt-4-turbo"),
+      prompt: prompt,
+      system: memories,
+    });
+    ```
+
+### 3. Structured Message Format with Memory
+
+    ```typescript
+    import { generateText } from "ai";
+    import { createZentry } from "@Zentry/vercel-ai-provider";
+
+    const Zentry = createZentry();
+
+    const { text } = await generateText({
+      model: Zentry("gpt-4-turbo", { user_id: "borat" }),
+      messages: [
+        {
+          role: "user",
+          content: [
+            { type: "text", text: "Suggest me a good car to buy." },
+            { type: "text", text: "Why is it better than the other cars for me?" },
+          ],
+        },
+      ],
+    });
+    ```
+
+### 3. Streaming Responses with Memory Context
+
+    ```typescript
+    import { streamText } from "ai";
+    import { createZentry } from "@Zentry/vercel-ai-provider";
+
+    const Zentry = createZentry();
+
+    const { textStream } = await streamText({
+        model: Zentry("gpt-4-turbo", {
+            user_id: "borat",
+        }),
+        prompt: "Suggest me a good car to buy! Why is it better than the other cars for me? Give options for every price range.",
+    });
+
+    for await (const textPart of textStream) {
+        process.stdout.write(textPart);
+    }
+    ```
+
+### 4. Generate Responses with Tools Call
+
+    ```typescript
+    import { generateText } from "ai";
+    import { createZentry } from "@Zentry/vercel-ai-provider";
+    import { z } from "zod";
+
+    const Zentry = createZentry({
+      provider: "anthropic",
+      apiKey: "anthropic-api-key",
+      ZentryConfig: {
+        // Global User ID
+        user_id: "borat"
+      }
+    });
+
+    const prompt = "What the temperature in the city that I live in?"
+
+    const result = await generateText({
+      model: Zentry('claude-3-5-sonnet-20240620'),
+      tools: {
+        weather: tool({
+          description: 'Get the weather in a location',
+          parameters: z.object({
+            location: z.string().describe('The location to get the weather for'),
+          }),
+          execute: async ({ location }) => ({
+            location,
+            temperature: 72 + Math.floor(Math.random() * 21) - 10,
+          }),
+        }),
+      },
+      prompt: prompt,
+    });
+
+    console.log(result);
+    ```
+
+### 5. Get sources from memory
+
+```typescript
+const { text, sources } = await generateText({
+    model: Zentry("gpt-4-turbo"),
+    prompt: "Suggest me a good car to buy!",
+});
+
+console.log(sources);
+```
+
+The same can be done for `streamText` as well.
+
+## Graph Memory
+
+Zentry AI SDK now supports Graph Memory. You can enable it by setting `enable_graph` to `true` in the `ZentryConfig` object.
+
+```typescript
+const Zentry = createZentry({
+  ZentryConfig: { enable_graph: true },
+});
+```
+
+You can also pass `enable_graph` in the standalone functions. This includes `getMemories`, `retrieveMemories`, and `addMemories`.
+
+```typescript
+const memories = await getMemories(prompt, { user_id: "borat", ZentryApiKey: "m0-xxx", enable_graph: true });
+```
+
+The `getMemories` function will return an object with two keys: `results` and `relations`, if `enable_graph` is set to `true`. Otherwise, it will return an array of objects.
+
+
+## Key Features
+
+- `createZentry()`: Initializes a new Zentry provider instance.
+- `retrieveMemories()`: Retrieves memory context for prompts.
+- `getMemories()`: Get memories from your profile in array format.
+- `addMemories()`: Adds user memories to enhance contextual responses.
+
+## Best Practices
+
+1. **User Identification**: Use a unique `user_id` for consistent memory retrieval.
+2. **Memory Cleanup**: Regularly clean up unused memory data.
+
+    > **Note**: We also have support for `agent_id`, `app_id`, and `run_id`. Refer [Docs](/api-reference/memory/add-memories).
+
+## Conclusion
+
+Zentry’s Vercel AI SDK enables the creation of intelligent, context-aware applications with persistent memory and seamless integration.
+
+## Help
+
+- For more details on Vercel AI SDK, visit the [Vercel AI SDK documentation](https://sdk.vercel.ai/docs/introduction).
+- For Zentry documentation, refer to the [Zentry Platform](https://app.zentry.gg/).
+- If you need further assistance, please feel free to reach out to us through following methods:
+
+<Snippet file="get-help.mdx" />

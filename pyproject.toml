@@ -1,0 +1,75 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "zentryai"
+version = "0.1.102"
+description = "Long-term memory for AI Agents"
+authors = [
+    { name = "zentry", email = "founders@zentry.gg" }
+]
+readme = "README.md"
+requires-python = ">=3.9,<4.0"
+dependencies = [
+    "qdrant-client>=1.9.1",
+    "pydantic>=2.7.3",
+    "openai>=1.33.0",
+    "posthog>=3.5.0",
+    "pytz>=2024.1",
+    "sqlalchemy>=2.0.31",
+]
+
+[project.optional-dependencies]
+graph = [
+    "langchain-neo4j>=0.4.0",
+    "neo4j>=5.23.1",
+    "rank-bm25>=0.2.2",
+]
+test = [
+    "pytest>=8.2.2",
+    "pytest-mock>=3.14.0",
+    "pytest-asyncio>=0.23.7",
+]
+dev = [
+    "ruff>=0.6.5",
+    "isort>=5.13.2",
+    "pytest>=8.2.2",
+]
+
+[tool.hatch.build]
+include = [
+    "zentry/**/*.py",
+]
+exclude = [
+    "**/*",
+    "!zentry/**/*.py",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["zentry"]
+only-include = ["zentry"]
+
+[tool.hatch.build.targets.wheel.shared-data]
+"README.md" = "README.md"
+
+[tool.hatch.envs.default.scripts]
+format = [
+    "ruff format",
+]
+format-check = [
+    "ruff format --check",
+]
+lint = [
+    "ruff check",
+]
+lint-fix = [
+    "ruff check --fix",
+]
+test = [
+    "pytest tests/ {args}",
+]
+
+[tool.ruff]
+line-length = 120
+exclude = ["embedchain/", "openmemory/"]
