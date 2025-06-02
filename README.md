@@ -1,13 +1,3 @@
-<p align="center">
-  <a href="https://github.com/zentry-ai/zentry">
-    <img src="docs/images/banner-sm.png" width="800px" alt="Zentry - The Memory Layer for Personalized AI">
-  </a>
-</p>
-<p align="center" style="display: flex; justify-content: center; gap: 20px; align-items: center;">
-  <a href="https://trendshift.io/repositories/11194" target="blank">
-    <img src="https://trendshift.io/api/badge/repositories/11194" alt="Zentryai%2FZentry | Trendshift" width="250" height="55"/>
-  </a>
-</p>
 
 <p align="center">
   <a href="https://zentry.gg">Learn more</a>
