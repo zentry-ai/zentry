@@ -38,7 +38,7 @@
     {
       "name": "Talk to founders",
       "icon": "calendar",
-      "url": "https://cal.com/taranjeetio/ec"
+      "url": "https://cal.com/ilaundermoney/ec"
     }
   ],
   "topbarLinks": [
@@ -49,7 +49,7 @@
   ],
   "topbarCtaButton": {
     "name": "Join our slack",
-    "url": "https://embedchain.ai/slack"
+    "url": "https://zentry.gg/slack"
   },
   "primaryTab": {
     "name": "📘 Documentation"
@@ -241,18 +241,18 @@
     }
   ],
   "footerSocials": {
-    "website": "https://embedchain.ai",
-    "github": "https://github.com/embedchain/embedchain",
-    "slack": "https://embedchain.ai/slack",
-    "discord": "https://discord.gg/6PzXDgEjG5",
-    "twitter": "https://twitter.com/embedchain",
-    "linkedin": "https://www.linkedin.com/company/embedchain"
+    "website": "https://zentry.gg",
+    "github": "https://github.com/zentry-ai/zentry",
+    "slack": "https://zentry.gg/slack",
+    "discord": "https://zentry.gg/discord",
+    "twitter": "https://x.com/zentrysol",
+    "linkedin": "https://www.linkedin.com/company/zentry"
   },
   "isWhiteLabeled": true,
   "analytics": {
     "posthog": {
       "apiKey": "phc_PHQDA5KwztijnSojsxJ2c1DuJd52QCzJzT2xnSGvjN2",
-      "apiHost": "https://app.embedchain.ai/ingest"
+      "apiHost": "https://app.zentry.gg/ingest"
     },
     "ga4": {
       "measurementId": "G-4QK7FJE6T3"
